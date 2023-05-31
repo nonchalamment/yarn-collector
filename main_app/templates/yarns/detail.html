@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link 
+  rel="stylesheet" 
+  type="text/css" 
+  href="{% static 'css/yarns/yarn-detail.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+
+<section class="cat-container">
+  <div class="cat-img">
+    <img 
+      src="{% static 'images/walking.svg' %}" 
+      alt="A walking yarn"
+    >
+  </div>
+  <div class="cat-details">
+    <h1>{{ yarn.name }}</h1>
+    <h2>A {{ yarn.fiber }} {{ yarn.weight }} yarn.</h2>
+    <p>{{ yarn.description }}</p>
+  </div>
+</section>
+
+{% endblock %}

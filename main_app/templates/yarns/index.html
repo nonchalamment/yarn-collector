@@ -22,17 +22,19 @@
 <section class="card-container">
   {% for yarn in yarns %}
     <div class="card">
-      <div class="card-content">
-        <div class="card-img-container">
-          <img 
-            src="{% static 'images/yarn-logo.svg' %}" 
-            alt="A yarn ball"
-          >
-        </div>
-        <h2 class="card-title">{{ yarn.name }}</h2>
+      <a href="{% url 'yarn-detail' yarn.id %}">
+        <div class="card-content">
+          <div class="card-img-container">
+            <img 
+              src="{% static 'images/yarn-logo.svg' %}" 
+              alt="A yarn ball"
+            >
+          </div>
+          <h2 class="card-title">{{ yarn.name }}</h2>
           <p>A {{ yarn.fiber }} {{ yarn.weight }} yarn.</p>
-        <p><small>{{ yarn.description }}</small></p>
-      </div>
+          <p><small>{{ yarn.description }}</small></p>
+        </div>
+      </a>
     </div>
   {% endfor %}
 </section>
