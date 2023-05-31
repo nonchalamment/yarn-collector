@@ -8,7 +8,11 @@
 {% block content %}
 
 <div class="page-header">
-  <h1>Add a Yarn</h1>
+  {% if yarn %}
+    <h1>Edit {{ yarn.name }}</h1>
+  {% else %}
+    <h1>Add a Yarn</h1>
+  {% endif %}
   <img src="{% static 'images/happy.svg' %}" alt="A happy yarn"/>
 </div>
 {% comment %} 
