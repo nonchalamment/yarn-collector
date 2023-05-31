@@ -8,5 +8,6 @@ urlpatterns = [
   path('yarns/<int:yarn_id>/', views.yarn_detail, name='yarn-detail'),
   path('yarns/create/', views.YarnCreate.as_view(), name='yarn-create'),
   path('yarns/<int:pk>/update/', views.YarnUpdate.as_view(), name='yarn-update'),
-  path('yarns/<int:pk>/delete', views.YarnDelete.as_view(), name='yarn-delete'),
+  path('yarns/<int:pk>/delete/', views.YarnDelete.as_view(), name='yarn-delete'),
+  path('yarns/<int:yarn_id>/add-dusting/', views.add_dusting, name='add-dusting'),
 ]

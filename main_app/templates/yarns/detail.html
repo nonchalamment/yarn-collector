@@ -3,10 +3,20 @@
 
 {% block head %}
 <link 
+  href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css" 
+  rel="stylesheet" 
+/>
+<link rel="stylesheet" href="{% static 'css/mcdp.css' %}">
+<script 
+  src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"
+>
+</script>
+<link 
   rel="stylesheet" 
   type="text/css" 
   href="{% static 'css/yarns/yarn-detail.css' %}"
 />
+<script defer src="{% static 'js/yarn-detail.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -28,5 +38,48 @@
     </div>
   </div>
 </section>
+{% comment %} Existing cat-container above {% endcomment %}
+<div class="feedings-toy-container">
+  <section class="feedings">
+    <div class="subsection-title">
+      <h2>Dustings</h2>
+      <img 
+        src="{% static 'images/dusting_hand.svg' %}" 
+        alt="A dusting yarn"
+      />
+    </div>
+    <h3>Add a Dusting</h3>
+    <form
+      action="{% url 'add-dusting' yarn.id %}"
+      method="post" 
+      class="subsection-content"
+			autocomplete="off"
+    >
+      {% csrf_token %}
+      {{ dusting_form.as_p }}
+      <button type="submit" class="btn submit">Add Dusting</button>
+    </form>
+    <h3>Past Dustings</h3>
+    {% if yarn.dusting_set.all.count %}
+      <table>
+        <thead>
+          <tr><th>Date</th><th>Dusting</th></tr>
+        </thead>
+        <tbody>
+          {% for dusting in yarn.dusting_set.all %}
+            <tr>
+              <td>{{dusting.date}}</td>
+              <td>{{dusting.get_dust_display}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="subsection-content">
+        <p>{{yarn.name}} has never been dusted 😔</p>
+      </div>
+    {% endif %}
+  </section>
+</div>
 
 {% endblock %}

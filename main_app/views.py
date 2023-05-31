@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Yarn
+from .forms import DustingForm
 
 # Create your views here.
 def home(request):
@@ -15,7 +16,19 @@ def yarn_index(request):
 
 def yarn_detail(request, yarn_id):
   yarn = Yarn.objects.get(id=yarn_id)
-  return render(request, 'yarns/detail.html', { 'yarn': yarn })
+  dusting_form = DustingForm()
+  return render(request, 'yarns/detail.html', {
+    'yarn': yarn,
+    'dusting_form': dusting_form,
+    })
+
+def add_dusting(request, yarn_id):
+  form = DustingForm(request.POST)
+  if form.is_valid():
+    new_dusting = form.save(commit=False)
+    new_dusting.yarn_id = yarn_id
+    new_dusting.save()
+  return redirect('yarn-detail', yarn_id=yarn_id)
 
 class YarnCreate(CreateView):
   model = Yarn
