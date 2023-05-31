@@ -22,6 +22,10 @@
     <h1>{{ yarn.name }}</h1>
     <h2>A {{ yarn.fiber }} {{ yarn.weight }} yarn.</h2>
     <p>{{ yarn.description }}</p>
+    <div class="cat-actions">
+      <a href="{% url 'yarn-update' yarn.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'yarn-delete' yarn.id %}" class="btn danger">Delete</a>
+    </div>
   </div>
 </section>
 
