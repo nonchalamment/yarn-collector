@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/projects/project-detail.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+  
+<div class="card" style="border-color: {{ project.color }}">
+  <div class="card-bg" style="background-color: {{ project.color }}"></div>
+  <div class="card-content">
+    <h2>{{ project.name }}</h2>
+    <p>A {{ project.color }} WIP</p>
+  </div>
+</div>
+<a href="{% url 'project-update' project.id %}" class="btn warn">Edit</a>
+<a href="{% url 'project-delete' project.id %}" class="btn danger">Delete</a>
+
+{% endblock %}

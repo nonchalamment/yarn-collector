@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Yarn
+from django.views.generic import ListView, DetailView
+from .models import Yarn, Project
 from .forms import DustingForm
 
 # Create your views here.
@@ -41,3 +42,21 @@ class YarnUpdate(UpdateView):
 class YarnDelete(DeleteView):
   model = Yarn
   success_url = '/yarns/'
+
+class ProjectCreate(CreateView):
+  model = Project
+  fields = '__all__'
+
+class ProjectList(ListView):
+  model = Project
+
+class ProjectDetail(DetailView):
+  model = Project
+
+class ProjectUpdate(UpdateView):
+  model = Project
+  fields = ['name', 'color']
+
+class ProjectDelete(DeleteView):
+  model = Project
+  success_url = '/projects/'

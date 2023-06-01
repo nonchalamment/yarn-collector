@@ -55,6 +55,11 @@
       class="subsection-content"
 			autocomplete="off"
     >
+      {% if yarn.dusted_for_today %}
+        <p class="fed">{{yarn.name}} has been dusted for today!</p>
+      {% else %}
+        <p class="unfed">{{yarn.name}} might be dusty!</p>
+      {% endif %}
       {% csrf_token %}
       {{ dusting_form.as_p }}
       <button type="submit" class="btn submit">Add Dusting</button>

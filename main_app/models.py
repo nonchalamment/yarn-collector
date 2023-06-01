@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
 
 DUSTLEVEL = (
   ('L', 'Light'),  
@@ -20,6 +21,9 @@ class Yarn(models.Model):
   def get_absolute_url(self):
     return reverse('yarn-detail', kwargs={'yarn_id': self.id})
   
+  def dusted_for_today(self):
+    return self.dusting_set.filter(date=date.today()).count() >= 1
+  
 class Dusting(models.Model):
   date = models.DateField('Dusting date')
   dust = models.CharField(
@@ -38,4 +42,12 @@ class Dusting(models.Model):
     # Django has automatically created the display method to access the value of dust (Field.choice)
     return f"{self.get_dust_display()} on {self.date}"
   
+class Project(models.Model):
+  name = models.CharField(max_length=50)
+  color = models.CharField(max_length=20)
+
+  def __str__(self):
+    return self.name
   
+  def get_absolute_url(self):
+    return reverse('project-detail', kwargs={'pk': self.id})

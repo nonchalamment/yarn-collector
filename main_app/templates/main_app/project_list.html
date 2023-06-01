@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/projects/project-index.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <h1>All Knitted Projects</h1>
+  <img src="{% static 'images/hat.svg' %}" alt="A knitted hat" />
+</section>
+
+<section class="card-container">
+  {% for project in project_list %}
+  <div class="card" style="border-color: {{ project.color }}">
+    <div class="card-bg" style="background-color: {{ project.color }}"></div>
+    <a href="{% url 'project-detail' project.id %}">
+      <div class="card-content">
+        <h2>{{ project.name }}</h2>
+        <p>A {{ project.color }} WIP</p>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
