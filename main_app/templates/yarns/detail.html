@@ -85,6 +85,55 @@
       </div>
     {% endif %}
   </section>
+  <section class="toys">
+    <div class="subsection-title">
+      <h2>Projects</h2>
+      <img src="{% static 'images/hat.svg' %}" alt="A knitted hat" />
+    </div>
+    <h3>Projects with {{ yarn.name }}</h3>
+    <div class="subsection-content">
+      {% if yarn.projects.count %}
+        {% for project in yarn.projects.all %}
+          <div class="toy-container">
+            <div 
+              class="color-block"
+              style="background-color: {{ project.color }}"
+            ></div>
+            <a href="{% url 'project-detail' project.id %}">
+              <p>A {{ project.color }} {{ project.name }}</p>
+            </a>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="no-toys">There are no projects with {{yarn.name}} 😞</p>
+      {% endif %}
+    </div>
+    <h3>Available Patterns</h3>
+    <div class="subsection-content">
+      {% comment %} We'll display available toys here {% endcomment %}
+      {% if projects.count %}
+        {% for project in projects.all %}
+          <div class="toy-container">
+            <div 
+              class="color-block"
+              style="background-color: {{ project.color }}"
+            ></div>
+            <a href="{% url 'project-detail' project.id %}">
+              <p>A {{ project.color }} {{ project.name }}</p>
+            </a>
+            <form action="" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn submit">Start Project</button>
+            </form>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="all-toys">
+          {{project.name}} already uses all the available patterns 🥳
+        </p>
+      {% endif %}
+    </div>
+  </section>
 </div>
 
 {% endblock %}

@@ -28,11 +28,17 @@
     </div>
     <nav>
       <ul>
-        <li><a href="{% url 'yarn-index' %}">All Yarns</a></li>
-        <li><a href="{% url 'project-index' %}">All Projects</a></li>
-        <li><a href="{% url 'yarn-create' %}">Add a Yarn</a></li>
-        <li><a href="{% url 'project-create' %}">Add a Project</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'yarn-index' %}">All Yarns</a></li>
+          <li><a href="{% url 'project-index' %}">All Projects</a></li>
+          <li><a href="{% url 'yarn-create' %}">Add a Yarn</a></li>
+          <li><a href="{% url 'project-create' %}">Add a Project</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'logout' %}">Log out</a></li>
+        {% else %}
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
       </ul>
     </nav>
   </header>
